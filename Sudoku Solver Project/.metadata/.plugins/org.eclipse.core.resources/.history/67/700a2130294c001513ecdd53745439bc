@@ -1,0 +1,14 @@
+package SolverAlgorithms;
+
+import Main.SudokuBoard;
+
+public class RowColumnCompare extends SolverAlgorithm {
+
+	@Override
+	public SudokuBoard searchForValues(SudokuBoard boardState) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}

@@ -1,0 +1,122 @@
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
+
+
+public class Solver {
+	
+	BigInteger searchNumbers = BigInteger.valueOf(0);
+	BigInteger searched = BigInteger.valueOf(0);
+	private final BigInteger bigOne = BigInteger.valueOf(1);
+	private SudokuBoard board;
+	
+	
+	public Solver() {
+		board = new SudokuBoard();
+		solveBoard(board);
+	}
+	
+	private void solveBoard(SudokuBoard board){
+		board.createTestBoard();
+//		board.createHardTestBoard();
+		
+		System.out.println("Board on start-up:");
+		board.printBoard();
+		System.out.println();
+		
+		printSearchSpace(board);
+		BRUTEFORCE_LEGAL_VALUES(board, 0, 0);
+		System.out.println("BRUTEFORCE_LEGAL_VALUES searched " + searched);
+		
+		searched = BigInteger.valueOf(0);
+		
+//		BRUTEFORCE_ALL_VALUES(board, 0, 0);
+//		System.out.println("BRUTEFORCE_ALL_VALUES searched " + searched);
+		
+	}
+	
+	private int stateCounter = 0;
+
+	private boolean BRUTEFORCE_LEGAL_VALUES(SudokuBoard board, int row, int col){
+		stateCounter++;
+		searched = searched.add(bigOne);
+		if(col == 9){
+			if(row == 8){
+				return checkIfSolution(board);
+			}
+			row++;
+			col = 0;
+		}
+
+		//checks if the place already has a value (means that it is a correct value!)
+		if(!board.isUnassigned(row, col))
+			return BRUTEFORCE_LEGAL_VALUES(board, row, col + 1);
+		
+		else{
+			ArrayList<Integer> legalValues = board.getLegalValues(row, col);
+			
+			//if the tile is empty but doesnt have any legal values means its useless to continue this branch
+			if(legalValues.isEmpty())
+				return false;
+			
+			for(int value : legalValues){
+				board.setValue(row, col, value);
+				
+				if(BRUTEFORCE_LEGAL_VALUES(board, row, col + 1))
+					return true;
+			}
+			
+			board.setUnassigned(row, col);
+		}
+		return false;
+	}
+	
+	
+	
+	private void BRUTEFORCE_ALL_VALUES(SudokuBoard board, int row, int col){
+		stateCounter++;
+		searched = searched.add(bigOne);
+		if(col == 9){
+			if(row == 8){
+				checkIfSolution(board);
+				return;
+			}
+			row++;
+			col = 0;
+		}
+
+		//checks if the place already has a value (means that it is a correct value!)
+		if(!board.isUnassigned(row, col)){
+			BRUTEFORCE_ALL_VALUES(board, row, col + 1);
+		}
+		
+		else{
+			
+			for(int value = 1; value < 10; value++){
+				
+				board.setValue(row, col, value);
+			
+				BRUTEFORCE_ALL_VALUES(board, row, col + 1);
+			}
+			
+			board.setUnassigned(row, col);
+		}
+	}
+
+	
+	
+	private boolean checkIfSolution(SudokuBoard board) {
+		if(board.containsSolution()){
+			System.out.println("found the solution after " + searched + " iterations");
+			board.printBoard();
+			return true;
+		}
+		return false;
+	}
+
+	// HELP STUFF
+	private void printSearchSpace(SudokuBoard board){
+		System.out.println("search space: " + board.getSearchSpace());
+	}
+	
+}

@@ -1,0 +1,272 @@
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+
+public class SudokuBoard {
+
+	private final int UNASSIGNED = -1;
+	
+	private int[][] board = new int[9][9];
+	
+	private int[] columnArray = new int[9];
+	
+	private HashMap<Integer, ArrayList<Integer>> legalValues = new HashMap<Integer, ArrayList<Integer>>();
+	
+	
+	
+	
+	public void createTestBoard(){
+		int[] row1 = {UNASSIGNED, UNASSIGNED, 2, UNASSIGNED, 4, UNASSIGNED, 5, UNASSIGNED, UNASSIGNED};
+		int[] row2 = {5, 1, UNASSIGNED, UNASSIGNED, UNASSIGNED, 9, UNASSIGNED, UNASSIGNED, UNASSIGNED};
+		int[] row3 = {7, UNASSIGNED, 8, UNASSIGNED, 3, UNASSIGNED, UNASSIGNED, 6, UNASSIGNED};
+		int[] row4 = {3, UNASSIGNED, 6, UNASSIGNED, 5, UNASSIGNED, UNASSIGNED, UNASSIGNED, UNASSIGNED};
+		int[] row5 = {4, UNASSIGNED, 5, UNASSIGNED, UNASSIGNED, UNASSIGNED,3, UNASSIGNED, 1};
+		int[] row6 = {UNASSIGNED, UNASSIGNED, UNASSIGNED, UNASSIGNED, 2, UNASSIGNED, 6, UNASSIGNED, 8};
+		int[] row7 = {UNASSIGNED, 5, UNASSIGNED, UNASSIGNED, 1, UNASSIGNED, 4, UNASSIGNED, 6};
+		int[] row8 = {UNASSIGNED, UNASSIGNED, UNASSIGNED, 7, UNASSIGNED, UNASSIGNED, UNASSIGNED, 3, 5};
+		int[] row9 = {UNASSIGNED, UNASSIGNED, 9, UNASSIGNED, 6, UNASSIGNED, 2, UNASSIGNED, UNASSIGNED};
+		board[0] =  row1;
+		board[1] =  row2;
+		board[2] =  row3;
+		board[3] =  row4;
+		board[4] =  row5;
+		board[5] =  row6;
+		board[6] =  row7;
+		board[7] =  row8;
+		board[8] =  row9;
+		
+//		initializeLegalValuesMap();
+	}
+
+	
+//	private void initializeLegalValuesMap(){
+//		for(int row = 0; row < 9; row++){
+//			for(int col = 0; col < 9; col++){
+//				int key = row * 9 + col + 1;
+//				legalValues.put(key, calculateLegalValues(row, col));
+//			}
+//		}
+//		
+////		printLegalValues();
+//	}
+//	
+//	
+//	public void printLegalValues(){
+//		for(int key : legalValues.keySet()){
+//			System.out.print("key " + key + ": ");
+//			for(int value : legalValues.get(key))
+//				System.out.print(value + " ");
+//			System.out.println();
+//		}
+//	}
+	
+	public ArrayList<Integer> getLegalValues(int row, int column){
+//		return legalValues.get(9*row + column + 1);
+		return calculateLegalValues(row, column);
+	}
+	
+	
+	/**
+	 * 
+	 * @param row
+	 * @param column
+	 * @return
+	 */
+	public ArrayList<Integer> calculateLegalValues(int row, int column){
+		ArrayList<Integer> output = new ArrayList<Integer>();
+		
+		//if the tile already has a value then return a empty array
+		if(board[row][column] != UNASSIGNED)
+			return output;
+		
+		//adds values 1-9 to the array			
+		for(int i = 1; i < 10; i++)
+			output.add(i);
+		
+		//removes all the values that is in the same row from output
+		for(Integer i : board[row]){
+			if(i != UNASSIGNED)
+				output.remove(i);
+		}
+
+		//removes all the values that is in the same column from output
+		for(int i = 0; i < 9; i++){
+			Integer value = board[i][column]; 
+			if(value != UNASSIGNED)
+				if(output.contains(value))
+					output.remove(value);
+		}
+
+		//removes all the values that is in the same square from output
+		for(Integer value : getSquareArray(getSquareNr(row, column))){
+			if(output.contains(value))
+				output.remove(value);
+		}
+		
+		return output;
+	}
+	
+	
+	private ArrayList<Integer> getSquareArray(int square) {
+		int startRow = (int)(square/3) * 3; //starts on row 0, 3 and 6
+		int startColumn = (square % 3) * 3; //starts on col 0, 3 and 6
+		ArrayList<Integer> output = new ArrayList<Integer>();
+		System.out.println("getSquare(" + square + ") for row " + startRow + " col " + startColumn);
+		for(int row = startRow; row < startRow + 3; row++)
+			for(int col = startColumn; col < startColumn+ 3; col++)
+				if(board[row][col] != UNASSIGNED)
+					output.add(board[row][col]);
+		return output;
+	}
+
+
+	private int getSquareNr(int row, int column) {
+		int square = ((int)(row / 3))*3 + ((int)(column/3)) + 1;
+		System.out.println("\nrow " + (row + 1 ) + " column " + (column+1) + " square " + square);
+		return square - 1; //returns the square as 0-indexed
+	}
+
+	public boolean isUnassigned(int row, int col){
+		if(board[row][col] == UNASSIGNED)
+			return true;
+		return false;
+	}
+
+	public BigInteger getSearchSpace() {
+		BigInteger searchSpace = BigInteger.valueOf(1);
+		for(int key : legalValues.keySet()){
+			BigInteger size = BigInteger.valueOf(legalValues.get(key).size());
+//			System.out.println("size " + size.intValue());
+			if(size.intValue() != 0)
+				searchSpace = searchSpace.multiply(size);
+//			System.out.println("searchSpace " + searchSpace);
+		}
+		return searchSpace;
+	}
+
+	public boolean containsSolution() {
+		
+		//iterates over all rows and columns and checks that each contains the value-range 1-9 and no same values twice
+		for(int row = 0; row < 9; row++){
+			if(!contains1to9(board[row]))
+				return false;
+			
+			for(int col = 0; col < 9; col++)
+				columnArray[col] = board[col][row];
+			if(!contains1to9(columnArray))
+				return false;
+		}
+		
+		//iterates over all squares and checks if all contains a legal set of values
+		for(int i = 0; i < 9; i++)
+			if(!isLegalSquare(i))
+				return false;
+		
+		return true;
+			
+	}
+	
+	private boolean isLegalSquare(int square) {
+		if(contains1to9(getSquareArray(square)))
+			return true;
+		return false;
+	}
+
+	private boolean contains1to9(ArrayList<Integer> array){
+		boolean foundValue;
+		
+		for(int value = 1; value < 10; value++){
+			foundValue = false;
+			for(int i = 0; i< array.size(); i++)
+				if(array.get(i) == value){
+					foundValue = true;
+					break;
+				}
+			
+			if(!foundValue)
+				return false;
+		}
+		return true;
+	}
+
+	private boolean contains1to9(int[] array){
+		boolean foundValue;
+		
+		for(int value = 1; value < 10; value++){
+			foundValue = false;
+			for(int i = 0; i< array.length; i++)
+				if(array[i] == value){
+					foundValue = true;
+					break;
+				}
+			
+			if(!foundValue)
+				return false;
+		}
+		return true;
+	}
+
+
+	public void setUnassigned(int row, int col) {
+		board[row][col] = UNASSIGNED;
+	}
+
+	public void setValue(int row, int col, int value) {
+		board[row][col] = value;
+	}
+	
+	
+	/**
+	 * 0 indexed
+	 * @param i
+	 * @return
+	 */
+	public int[] getRow(int i){
+		return board[i];
+	}
+	
+	public void printBoard(){
+		System.out.println("+-----------------------+");
+		for(int row = 0; row < 9; row++){
+			if(row == 3 || row == 6)
+				System.out.println("+-------+-------+-------+");
+			printRow(row);
+			
+		}
+		System.out.println("+-------+-------+-------+");
+			
+	}
+	
+	private void printRow(int row){
+		for(int col = 0; col < 9; col++){
+			if(col == 0 || col == 3 || col == 6)
+				System.out.print("| ");
+			int value = board[row][col];
+			if(value != UNASSIGNED)
+				System.out.print(value + " ");
+			else
+				System.out.print("  ");
+		}
+		System.out.println("|");
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+import java.util.ArrayList;
+
+
+public class Solver {
+	
+	ArrayList<SolverAlgorithm> algorithms;
+	
+	public boolean solveBoard(SudokuBoard board)
+	{
+		// Iterate through all different solving algorithms, if an algorithm finds a new number then restart on the first algorithm.
+		// If none of the algorithm finds a new number then no solution can be found and solveboard will return false.
+		
+		
+		
+		
+		
+		
+		System.out.println("No solution was found");
+		board.printBoard();
+		return false;
+	}
+}

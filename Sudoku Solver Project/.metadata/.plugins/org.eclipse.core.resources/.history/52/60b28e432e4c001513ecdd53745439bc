@@ -1,0 +1,14 @@
+package SolverAlgorithms;
+
+import Main.SudokuBoard;
+
+public class RowColumnCompare extends SolverAlgorithm
+{
+
+	public SudokuBoard searchForValues(SudokuBoard boardState)
+	{
+
+		return null;
+	}
+
+}

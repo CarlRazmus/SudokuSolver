@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="Solver"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="SudokuBoard"/>
+<fullyQualifiedTypeName name="java.math.BigInteger"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="Main.SudokuBoard"/>
+<fullyQualifiedTypeName name="SolverAlgorithms.RowColumnCompare"/>
+<fullyQualifiedTypeName name="SolverAlgorithms.SolverAlgorithm"/>
+</qualifiedTypeNameHistroy>

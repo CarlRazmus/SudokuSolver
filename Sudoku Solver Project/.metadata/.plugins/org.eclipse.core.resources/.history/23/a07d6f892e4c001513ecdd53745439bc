@@ -1,0 +1,18 @@
+package SolverAlgorithms;
+
+import Main.SudokuBoard;
+
+public class RowColumnCompare extends SolverAlgorithm
+{
+
+	public boolean searchForValues(SudokuBoard boardState)
+	{
+		for(int value = 1; value <= 9; value++)
+		{
+			
+		}
+		
+		return false;
+	}
+
+}

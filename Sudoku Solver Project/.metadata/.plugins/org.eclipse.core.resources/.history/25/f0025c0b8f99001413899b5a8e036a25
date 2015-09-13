@@ -1,0 +1,88 @@
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
+
+
+public class Solver {
+
+	
+
+	BigInteger searchNumbers = BigInteger.valueOf(0);
+	BigInteger searched = BigInteger.valueOf(0);
+	private final BigInteger bigOne = BigInteger.valueOf(1);
+	private SudokuBoard board;
+	
+	public Solver() {
+		board = new SudokuBoard();
+		solveBoard(board);
+	}
+	
+	private void solveBoard(SudokuBoard board){
+		board.createTestBoard();
+		board.printBoard();
+		printSearchSpace(board);
+		BRUTEFORCE(board, 0, 0);
+		System.out.println("searched " + searched);
+	}
+
+	private void BRUTEFORCE(SudokuBoard board, int row, int col){
+		searched = searched.add(bigOne);
+		if(col == 9){
+			if(row == 8){
+				checkIfSolution(board);
+				System.out.println("found a path");
+				return;
+			}
+			row++;
+			col = 0;
+		}
+
+		//checks if the place already has a value (means that it is a correct value!)
+		if(!board.isUnassigned(row, col)){
+			BRUTEFORCE(board, row, col + 1);
+		}
+		
+		else{
+			ArrayList<Integer> legalValues = board.getLegalValues(row, col);
+
+			System.out.print("\nlegal values: ");
+			//if the tile is empty but doesnt have any valid values means its useless to continue this branch
+			if(legalValues.isEmpty()){
+
+				//prints all legal values that the node can have
+				System.out.println("\nno legal values --> returns to last state");
+				return;
+			}
+			
+			for(int value : legalValues){
+
+				//prints all legal values that the node can have
+				for(int v : legalValues)
+					System.out.print(v + " ");
+				
+				System.out.println("\npicking value " + value);
+				
+				board.setValue(row, col, value);
+
+				board.printBoard();
+				
+				BRUTEFORCE(board, row, col + 1);
+			}
+//			System.out.println("resetting row " + row + " col " + col);
+			board.setUnassigned(row, col);
+		}
+	}
+	
+
+	
+	
+	private void checkIfSolution(SudokuBoard board) {
+		board.containsSolution();
+	}
+
+	// HELP STUFF
+	private void printSearchSpace(SudokuBoard board){
+		System.out.println("search space: " + board.getSearchSpace());
+	}
+	
+}

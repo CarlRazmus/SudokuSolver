@@ -1,0 +1,20 @@
+package Main;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		SudokuBoard board = new SudokuBoard();
+		Solver solver = new Solver();
+		
+		board.createHardTestBoard();
+		
+		System.out.println("Board on start-up:");
+		board.printBoard();
+		
+		boolean result = solver.solveBoard(board);
+		
+		System.out.println("Board after solving:");
+		board.printBoard();
+	}
+
+}

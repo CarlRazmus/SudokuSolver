@@ -1,0 +1,11 @@
+
+public abstract class SolverAlgorithm {
+
+	/**
+	 * Tries to find new values to insert on the board
+	 * 
+	 * @param boardState
+	 * @return returns true if a new value was found and false if the board remains the same as before.
+	 */
+	public abstract boolean searchForValues(SudokuBoard boardState);
+}
