@@ -4,6 +4,17 @@
 <fullyQualifiedTypeName name="LongRoad"/>
 <fullyQualifiedTypeName name="java.awt.RenderingHints.Key"/>
 <fullyQualifiedTypeName name="java.security.Key"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="NewRTAStar"/>
+<fullyQualifiedTypeName name="SolverAlgorithms.SolverAlgorithm"/>
+<fullyQualifiedTypeName name="SolverAlgorithms.RowColumnCompareAdvance"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="Main.BoardPosition"/>
+<fullyQualifiedTypeName name="java.awt.GridLayout"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
+<fullyQualifiedTypeName name="SolverAlgorithms.GraphicalSudokuBoard"/>
 </qualifiedTypeNameHistroy>

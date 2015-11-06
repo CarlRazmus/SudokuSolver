@@ -1,0 +1,20 @@
+package Main;
+
+
+
+public class SudokuGenerator
+{
+	SudokuBoard board;
+	
+	public SudokuGenerator()
+	{
+		board = new SudokuBoard();
+	}
+	
+	
+	public void generateRandomBoard(int amountOfknownStartNumbers)
+	{
+		
+	}
+	
+}

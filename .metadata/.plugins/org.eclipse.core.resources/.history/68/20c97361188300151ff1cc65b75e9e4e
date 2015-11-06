@@ -1,0 +1,51 @@
+package SolverAlgorithms;
+
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class GraphicalSudokuBoard extends JFrame{
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 0;
+    private JTextField f[][]= new JTextField[9][9] ;
+    private JPanel p[][]= new JPanel [3][3];
+
+    public GraphicalSudokuBoard()
+	{
+	    super("Sudoku");
+
+        for(int row=0; row<=8; row++){
+            for(int column=0; column<=8; column++){
+                f[row][column]=new JTextField(1);
+            }
+        }
+
+        for(int row=0; row<=2; row++){
+            for(int column=0; column<=2; column++){
+                p[row][column]=new JPanel(new GridLayout(3,3));
+            }
+        }
+
+        setLayout(new GridLayout(3,3,5,5));
+
+        for(int groupRow=0; groupRow<=2; groupRow++){
+            for(int groupColumn=0; groupColumn<=2; groupColumn++){    
+                for(int x=0; x<=2; x++ ){
+                    for(int y=0; y<=2; y++){
+                        p[groupRow][groupColumn].add(f[y+groupRow*3][x+groupColumn*3]);
+                    }
+                }
+            add(p[groupRow][groupColumn]);
+            }
+        }
+    }
+    
+    public void setTileValue(int row, int column, int value){
+    	f[row][column].setText(String.valueOf(value));
+    }
+}

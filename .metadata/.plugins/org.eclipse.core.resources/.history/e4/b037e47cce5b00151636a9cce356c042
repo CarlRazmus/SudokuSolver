@@ -1,0 +1,29 @@
+package Main;
+
+import javax.print.attribute.TextSyntax;
+
+public class Main {
+	
+	
+	public static void main(String[] args) {
+//		SudokuGenerator sudokuGenerator = new SudokuGenerator();
+		Solver solver = new Solver();
+		int puzzle[] = new int[81];
+		SudokuBoard board = new SudokuBoard(puzzle);
+		
+		
+		board.createEasyTestBoard();
+		
+		BoardPosition pos = board.getBoardPosition(5, 1);
+		System.out.println("col: " + pos.getColumn() + " row " + pos.getRow());
+		
+		System.out.println("Board on start-up:");
+		board.printBoard();
+		
+		solver.solveBoard(board);
+		
+		System.out.println("Board after solving:");
+//		board.printBoard();
+
+	}
+}

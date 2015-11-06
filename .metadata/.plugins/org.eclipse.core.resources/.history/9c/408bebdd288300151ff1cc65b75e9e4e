@@ -1,0 +1,34 @@
+package Main;
+
+import javax.print.attribute.TextSyntax;
+
+import SolverAlgorithms.GraphicalSudokuBoard;
+
+public class Main {
+	
+	
+	public static void main(String[] args) {
+		SudokuGenerator sudokuGenerator;
+		SudokuBoard board;
+		Solver solver;
+		
+		sudokuGenerator = new SudokuGenerator();
+		solver = new Solver();
+		
+		board = sudokuGenerator.generateRandomBoard(45);
+		
+		System.out.println("Board on start-up:");
+		board.printBoard();
+		
+		solver.solveBoard(board);
+		
+		System.out.println("Board after solving:");
+		board.printBoard();
+		
+		GraphicalSudokuBoard graphicalSudokuBoard = new GraphicalSudokuBoard();
+		graphicalSudokuBoard.setSize(400, 400);
+		graphicalSudokuBoard.setTileValue(0, 4, 3);
+		graphicalSudokuBoard.setVisible(true);
+
+	}
+}

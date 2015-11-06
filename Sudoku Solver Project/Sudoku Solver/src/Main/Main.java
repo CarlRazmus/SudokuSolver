@@ -1,20 +1,35 @@
 package Main;
 
+import SolverAlgorithms.GraphicalSudokuBoard;
+
 public class Main {
 	
+	
 	public static void main(String[] args) {
-		SudokuBoard board = new SudokuBoard();
-		Solver solver = new Solver();
+		SudokuGenerator sudokuGenerator;
+		SudokuBoard board;
+		Solver solver;
+
+		GraphicalSudokuBoard.initializeGraphicalSudokuBoardObject();
+		GraphicalSudokuBoard.getSingletonObject().setSize(400, 400);
+		GraphicalSudokuBoard.getSingletonObject().setTileValue(0, 4, 3);
+		GraphicalSudokuBoard.getSingletonObject().setVisible(true);
 		
-		board.createHardTestBoard();
+		
+		sudokuGenerator = new SudokuGenerator();
+		solver = new Solver();
+		
+		board = sudokuGenerator.generateRandomBoard(45);
 		
 		System.out.println("Board on start-up:");
 		board.printBoard();
 		
-		boolean result = solver.solveBoard(board);
+		GraphicalSudokuBoard.getSingletonObject().setSleepTime(200);
+		
+		solver.solveBoard(board);
 		
 		System.out.println("Board after solving:");
 		board.printBoard();
+		
 	}
-
 }

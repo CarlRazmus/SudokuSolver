@@ -1,0 +1,12 @@
+1442242416635	Rename local variable 'i'
+1442242495945	Rename local variable 'updatePos'
+1442242640199	Rename local variable 'posIndexInSquare'
+1442245224418	Rename local variable 'value'
+1442252295880	Rename method 'getSquare'
+1442259137807	Move compilation unit
+1442259346930	Rename local variable 'x'
+1442259358024	Rename local variable 'y'
+1442260052867	Delete element
+1442333583493	Rename local variable 'x'
+1442333590609	Rename local variable 'y'
+1442335580364	Rename method 'getLegalValues'

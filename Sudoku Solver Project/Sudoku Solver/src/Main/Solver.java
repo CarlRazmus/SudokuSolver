@@ -2,6 +2,7 @@ package Main;
 import java.util.ArrayList;
 
 import SolverAlgorithms.RowColumnCompare;
+import SolverAlgorithms.RowColumnCompareAdvance;
 import SolverAlgorithms.SolverAlgorithm;
 
 
@@ -10,32 +11,45 @@ public class Solver {
 	ArrayList<SolverAlgorithm> algorithms;
 	
 	public Solver(){
-		algorithms.add(new RowColumnCompare());
+		algorithms = new ArrayList<SolverAlgorithm>();
+		
+//		algorithms.add(new RowColumnCompare());
+		algorithms.add(new RowColumnCompareAdvance());
 	}
-	
-	public boolean solveBoard(SudokuBoard board)
+/** 
+ * Tries to find a solution to the given board by iterating through all its internal algorithms.
+ * 
+ * @param board
+ */
+	public void solveBoard(SudokuBoard board)
 	{
-		boolean foundNewValue = true;
+		boolean foundNewValue;
 		
-		// Iterate through all different solving algorithms, if an algorithm finds a new number then restart on the first algorithm.
-		// If none of the algorithm finds a new number then no solution can be found and solveboard will return false.
-		
-		while(foundNewValue){
-
-			//begin with updating the LIST for each empty board slot.
-			//this shall ofc be updated later to remove new found values instead of updating all values all the time)
-			board.updateAllLists();
+		do {
+			
+			if(board.isSolution())
+			{
+				System.out.println("a solution was found");
+				return;
+			}
 			
 			foundNewValue = false;
 			
 			for(SolverAlgorithm algorithm : algorithms)
 			{
-				boolean foundNewValue = algorithm.searchForValues(board);
+				board.updateAllLists();
+				
+				if(algorithm.calcNextNumber(board))
+				{
+					foundNewValue = true;
+					break;
+				}
 			}
-		
 		}
+		while(foundNewValue);
+		
+		
 		System.out.println("No solution was found");
 		board.printBoard();
-		return false;
 	}
 }

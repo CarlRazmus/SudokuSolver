@@ -1,0 +1,42 @@
+package Main;
+
+import java.util.ArrayList;
+
+public class SudokuGenerator
+{
+	SudokuBoard board;
+	
+	public SudokuGenerator()
+	{
+		board = new SudokuBoard();
+	}
+	
+	
+	public SudokuBoard generateRandomBoard(int amountOfknownStartNumbers)
+	{
+		if(recursiveFindBoard(0, 0))
+		{
+			System.out.println("successfully generated a SUDOKU BOARD");
+			board.printBoard();
+		}
+		else
+		{
+			board = null;
+			
+			System.out.println("unsuccessful generating of sudoku board");
+		}
+		
+		return board;
+	}
+	
+	private boolean recursiveFindBoard(int row, int column)
+	{
+		ArrayList<Integer> validNumbers = board.getValidNumbers(row, column);
+		
+		
+		
+		
+		return false;
+	}
+	
+}

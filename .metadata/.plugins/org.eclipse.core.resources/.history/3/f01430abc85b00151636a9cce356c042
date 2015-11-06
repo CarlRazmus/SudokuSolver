@@ -1,0 +1,34 @@
+package Main;
+
+
+
+public class SudokuGenerator
+{
+	SudokuBoard board;
+	
+	public SudokuGenerator()
+	{
+		board = new SudokuBoard();
+	}
+	
+	
+	public void generateRandomBoard(int amountOfknownStartNumbers)
+	{
+		if(!recursiveFindBoard(0, 0))
+		{
+			System.out.println("successfully generated a SUDOKU BOARD");
+		}
+		else
+		{
+			board = null;
+			
+			System.out.println("unsuccessful generating of sudoku board");
+		}
+	}
+	
+	private boolean recursiveFindBoard(int row, int column)
+	{
+		return false;
+	}
+	
+}
