@@ -10,10 +10,9 @@ public class Main {
 		SudokuBoard board;
 		Solver solver;
 
-		GraphicalSudokuBoard.initializeGraphicalSudokuBoardObject();
-		GraphicalSudokuBoard.getSingletonObject().setSize(400, 400);
+		DebugGUI.initialize();
+		
 		GraphicalSudokuBoard.getSingletonObject().setTileValue(0, 4, 3);
-		GraphicalSudokuBoard.getSingletonObject().setVisible(true);
 		
 		
 		sudokuGenerator = new SudokuGenerator();
@@ -24,7 +23,7 @@ public class Main {
 		System.out.println("Board on start-up:");
 		board.printBoard();
 		
-		GraphicalSudokuBoard.getSingletonObject().setSleepTime(200);
+		GraphicalSudokuBoard.getSingletonObject().setSleepTime(1500);
 		
 		solver.solveBoard(board);
 		

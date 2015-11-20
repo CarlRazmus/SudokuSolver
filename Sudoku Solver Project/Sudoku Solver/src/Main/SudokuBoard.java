@@ -325,7 +325,10 @@ public class SudokuBoard
 		for(int row = 0; row < 9; row++)
 		{
 			if(board[row][column] == UNASSIGNED)
+			{
 				board[row][column] = TEMPORARY_BLOCKED;
+				GraphicalSudokuBoard.getSingletonObject().setTileAsBlocked(row, column);
+			}
 		}
 	}
 

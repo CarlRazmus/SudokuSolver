@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -12,7 +13,7 @@ import javax.swing.JTextField;
 import Main.BoardPosition;
 
 
-public class GraphicalSudokuBoard extends JFrame{
+public class GraphicalSudokuBoard extends JComponent{
 
     /**
      * 
@@ -31,6 +32,8 @@ public class GraphicalSudokuBoard extends JFrame{
     	if(graphicalSudokuBoardObject == null)
     	{
     		graphicalSudokuBoardObject = new GraphicalSudokuBoard();
+    		graphicalSudokuBoardObject.setSize(200, 200);
+    		graphicalSudokuBoardObject.setVisible(true);
     	}
     }
     
@@ -41,8 +44,6 @@ public class GraphicalSudokuBoard extends JFrame{
     
     private GraphicalSudokuBoard()
 	{
-	    super("Sudoku");
-
         for(int row=0; row<=8; row++){
             for(int column=0; column<=8; column++){
             	JTextField textField = new JTextField(1);

@@ -3,6 +3,7 @@ package SolverAlgorithms;
 import java.util.ArrayList;
 
 import Main.BoardPosition;
+import Main.DebugGUI;
 import Main.SudokuBoard;
 
 public class RowColumnCompareAdvance extends SolverAlgorithm
@@ -22,18 +23,17 @@ public class RowColumnCompareAdvance extends SolverAlgorithm
 		int posIndexInSquare;
 		boolean outputBool = false;
 		
+		//iterate over all values
 		for(int currentNr = 1; currentNr <= 9; currentNr++)
 		{
-
-			GraphicalSudokuBoard.getSingletonObject().clearTemporaryTileBackgroundColors();
-
 			availableSquares = boardState.createBlockadesByValue(currentNr);
 			availableSquaresNextIteration.addAll(availableSquares); //do not use "=", 
 			
+			DebugGUI.writeToTextField(String.valueOf(currentNr));
+				
 			//iterate over all squares that did not contain value
 			for(int squareIndex : availableSquares)
 			{
-//				System.out.println("running calcNextNumber in Comparator for nr " + squareIndex);
 				
 				squareArray = boardState.getSquareValues(squareIndex);
 				foundUnassigned = false;
@@ -74,6 +74,7 @@ public class RowColumnCompareAdvance extends SolverAlgorithm
 				}
 			}
 			
+			//TODO: should keep doing this until no new blockades are found
 			
 			//only do this if no solution was found!!! could lead to unnecessary iterations otherwise.
 			
