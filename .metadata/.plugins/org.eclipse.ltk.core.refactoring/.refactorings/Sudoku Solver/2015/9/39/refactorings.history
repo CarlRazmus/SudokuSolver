@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;posIndexInSquareToUpdate&apos; in &apos;SolverAlgorithms.RowColumnCompare.calcNextNumber(...)&apos; to &apos;posIndexInSquare&apos;&#x0D;&#x0A;- Original project: &apos;Sudoku Solver&apos;&#x0D;&#x0A;- Original element: &apos;SolverAlgorithms.RowColumnCompare.calcNextNumber(SudokuBoard).posIndexInSquareToUpdate&apos;&#x0D;&#x0A;- Renamed element: &apos;posIndexInSquareToUpdate&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;posIndexInSquareToUpdate&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;SolverAlgorithms{RowColumnCompare.java[RowColumnCompare~calcNextNumber~QSudokuBoard;@posIndexInSquareToUpdate!436!464!440!463!I!0!false" name="posIndexInSquare" references="true" stamp="1443383191749" version="1.0"/>
-</session>

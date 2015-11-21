@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;rowNr&apos; in &apos;SolverAlgorithms.RowColumnCompareAdvance.checkIsTileSameColumn(...)&apos; to &apos;columnNr&apos;&#x0D;&#x0A;- Original project: &apos;Sudoku Solver&apos;&#x0D;&#x0A;- Original element: &apos;SolverAlgorithms.RowColumnCompareAdvance.checkIsTileSameColumn(int, int).rowNr&apos;&#x0D;&#x0A;- Renamed element: &apos;rowNr&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;rowNr&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;SolverAlgorithms{RowColumnCompareAdvance.java[RowColumnCompareAdvance~checkIsTileSameColumn~I~I@rowNr!3494!3502!3498!3502!I!0!true" name="columnNr" references="true" stamp="1444390214481" version="1.0"/>
-</session>
